@@ -1,5 +1,4 @@
 require_relative '../config/environment'
-
-
-
-puts "HELLO WORLD"
+require_relative 'playmethods.rb'
+welcome
+returning?
