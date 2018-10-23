@@ -1,4 +1,5 @@
 require 'pry'
+require 'colorize'
 
 @base = []
 @base << Monologue.find_or_create_by(character: "Macbeth", genre: "Tragedy" , age: 30, play: "Macbeth", timing: "1 minute",
@@ -18,11 +19,23 @@ require 'pry'
  )
 
 def welcome
-  puts "Greetings, Thespian! Here, you can behold your speeches to the people! 'Speak the speech, I pray you, as I pronounced it to you, trippingly on the tongue.'"
+  puts "______________________________________________________________________________"
+  greeting = "      Greetings, Thespian! Here, you can behold your speeches to the people! 'Speak the speech, I pray you, as I pronounced it to you, trippingly on the tongue.'".split(" ")
+  greeting.each do |word|
+    if word == "'Speak"
+      puts ""
+    end
+    print word.magenta + " "
+    sleep(0.25)
+  end
+  puts ""
+  puts "______________________________________________________________________________"
+  returning?
 end
 
 def returning?
-  puts "Are you an experienced Thespian or are you new? Type 'returning' or 'new'."
+  puts "Are you an experienced Thespian or are you new?"
+  puts "Please enter 'returning' or 'new'."
   answer = gets.chomp.downcase
   if answer == "new"
     newuser
@@ -37,27 +50,26 @@ def newuser
   name = gets.chomp.downcase
   if User.find_by(name: name) == nil
     @current_user = User.create(name: name)
-    # @base.each do |monologue|
-    #   Usermon.create(user_id: @current_user.id, monologue_id: monologue.id)
-    #   # monologue.users = @current_user
-    # end
     @current_user.monologues << @base
-    # binding.pry
     list_commands
   else
-    puts "Looks like you're already in the database. Sign in as a returning user"
+    puts "I've heard of you before! Please sign in as a returning user..."
     returninguser
   end
 end
 
 def returninguser
+  puts "------------------------------------------------------------------------"
   puts "Welcome back! What dost thou call thee?"
   name = gets.chomp.downcase
+  puts ""
   @current_user = User.find_by(name: name)
   if @current_user == nil
     puts "That name has never touched thine ears before! Don't worry, though, I'm listening."
     newuser
   else @current_user
+    puts "It's very nice to see you again!"
+    puts "----------------------------------------------------------------------"
     list_commands
   end
 end
@@ -137,7 +149,6 @@ def practice
       puts "100%"
       puts "Move on to the next line"
     elsif inputed_sentence != sentence
-      # binding.pryß
       percentage = comparison(inputed_sentence, sentence).to_f/sentence.size * 100.0
       puts ""
       puts "You got #{percentage}% of this line correct! You might want a little more practice!"
