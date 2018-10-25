@@ -3,8 +3,7 @@ require 'colorize'
 
 @base = []
 @base << Monologue.find_or_create_by(character: "Macbeth", genre: "Tragedy" , age: 30, play: "Macbeth", timing: "1 minute",
-  script: "She should have died hereafter; There would have been a time for such a word.
-  To-morrow, and to-morrow, and to-morrow, Creeps in this petty pace from day to day To the last syllable of recorded time, And all our yesterdays have lighted fools The way to dusty death. Out, out, brief candle! Life's but a walking shadow, a poor player That struts and frets his hour upon the stage And then is heard no more: it is a tale Told by an idiot, full of sound and fury, Signifying nothing.")
+  script: "She should have died hereafter; There would have been a time for such a word. To-morrow, and to-morrow, and to-morrow, Creeps in this petty pace from day to day To the last syllable of recorded time, And all our yesterdays have lighted fools The way to dusty death. Out, out, brief candle! Life's but a walking shadow, a poor player That struts and frets his hour upon the stage And then is heard no more: it is a tale Told by an idiot, full of sound and fury, Signifying nothing.")
 @base << Monologue.find_or_create_by(character: "Phebe", genre: "Comedy" , age: 30, play: "As You Like It", timing: "2 minutes",
   script: "Think not I love him, though I ask for him. 'Tis but a peevish boy; yet he talks well; But what care I for words? yet words do well, When he that speaks them pleases those that hear. It is a pretty youth: not very pretty: But, sure, he's proud; and yet his pride becomes him: He'll make a proper man: the best thing in him Is his complexion; and faster than his tongue Did make offence his eye did heal it up. He is not very tall; yet for his years he's tall: His leg is but so so; and yet 'tis well: There was a pretty redness in his lip, A little riper and more lusty red Than that mix'd in his cheek; 'twas just the difference Betwixt the constant red and mingled damask. There be some women, Silvius, had they mark'd him In parcels as I did, would have gone near To fall in love with him; but, for my part, I love him not nor hate him not; and yet Have more cause to hate him than to love him: For what had he to do to chide at me? He said mine eyes were black and my hair black; And, now I am remember'd, scorn'd at me. I marvel why I answer'd not again: But that's all one; omittance is no quittance. I'll write to him a very taunting letter, And thou shalt bear it: wilt thou, Silvius?")
 
@@ -17,19 +16,24 @@ require 'colorize'
 @base << Monologue.find_or_create_by(character: "Lucky", genre: "Comedy" , age: 40, play: "Waiting for Godot", timing: "5 minutes",
   script: "Given the existence as uttered forth in the public works of Puncher and Wattmann of a personal God quaquaquaqua with white beard quaquaquaqua outside time without extension who from the heights of divine apathia divine athambia divine aphasia loves us dearly with some exceptions for reasons unknown but time will tell and suffers like the divine Miranda with those who for reasons unknown but time will tell are plunged in torment plunged in fire whose fire flames if that continues and who can doubt it will fire the firmament that is to say blast heaven to hell so blue still and calm so calm with a calm which even though intermittent is better than nothing but not so fast and considering what is more that as a result of the labours left unfinished crowned by the Acacacacademy of Anthropopopometry of Essy-in-Possy of Testew and Cunard it is established beyond all doubt all other doubt than that which clings to the labours of men that as a result of the labours unfinished of Testew and Cunard it is established as hereinafter but not so fast for reasons unknown that as a result of the public works of Puncher and Wattmann it is established beyond all doubt that in view of the labours of Fartov and Belcher left unfinished for reasons unknown of Testew and Cunard left unfinished it is established what many deny that man in Possy of Testew and Cunard that man in Essy that man in short that man in brief in spite of the strides of alimentation and defecation is seen to waste and pine waste and pine and concurrently simultaneously what is more for reasons unknown in spite of the strides of physical culture the practice of sports such as tennis football running cycling swimming flying floating riding gliding conating camogie skating tennis of all kinds dying flying sports of all sorts autumn summer winter winter tennis of all kinds hockey of all sorts penicilline and succedanea in a word I resume and concurrently simultaneously for reasons unknown to shrink and dwindle in spite of the tennis I resume flying gliding golf over nine and eighteen holes tennis of all sorts in a word for reasons unknown in Feckham Peckham Fulham Clapham namely concurrently simultaneously what is more for reasons unknown but time will tell to shrink and dwindle I resume Fulham Clapham in a word the dead loss per head since the death of Bishop Berkeley being to the tune of one inch four ounce per head approximately by and large more or less to the nearest decimal good measure round figures stark naked in the stockinged feet in Connemara in a word for reasons unknown no matter what matter the facts are there and considering what is more much more grave that in the light of the labours lost of Steinweg and Peterman it appears what is more much more grave that in the light the light the light of the labours lost of Steinweg and Peterman that in the plains in the mountains by the seas by the rivers running water running fire the air is the same and than the earth namely the air and then the earth in the great cold the great dark the air and the earth abode of stones in the great cold alas alas in the year of their Lord six hundred and something the air the earth the sea the earth abode of stones in the great deeps the great cold on sea on land and in the air I resume for reasons unknown in spite of the tennis the facts are there but time will tell I resume alas alas on on in short in fine on on abode of stones who can doubt it I resume but not so fast I resume the skull to shrink and waste and concurrently simultaneously what is more for reasons unknown in spite of the tennis on on the beard the flames the tears the stones so blue so calm alas alas on on the skull the skull the skull the skull in Connemara in spite of the tennis the labours abandoned left unfinished graver still abode of stones in a word I resume alas alas abandoned unfinished the skull the skull in Connemara in spite of the tennis the skull alas the stones Cunard tennis… the stones… so calm… Cunard… unfinished…"
  )
+ @pid = fork{ exec 'afplay', "/Users/flatironschool/Development/Mod 1 Labs/Week 3 Project/module-one-final-project-guidelines-dumbo-web-100818/music/sawsquarenoise_-_Whosi.mp3" }
 
 def welcome
+  @pid
   puts "______________________________________________________________________________"
-  greeting = "      Greetings, Thespian! Here, you can behold your speeches to the people! 'Speak the speech, I pray you, as I pronounced it to you, trippingly on the tongue.'".split(" ")
-  greeting.each do |word|
-    if word == "'Speak"
+  greeting = "Greetings, Thespian! Here, you can behold your speeches to the people! 'Speak the speech, I pray you, as I pronounced it to you, trippingly on the tongue.".split("")
+
+  greeting.each do |char|
+    if char == "'"
       puts ""
     end
-    print word.magenta + " "
-    sleep(0.25)
+    print char.magenta
+    sleep(0.07)
   end
+
   puts ""
   puts "______________________________________________________________________________"
+  # fork{ exec 'killall afplay'}
   returning?
 end
 
@@ -41,19 +45,20 @@ def returning?
     newuser
   elsif answer == "returning"
      returninguser
-  else returning?
+  else
+    returning?
   end
 end
 
 def newuser
-  puts "What should I call thee?"
+  puts "What shall I call thee?"
   name = gets.chomp.downcase
   if User.find_by(name: name) == nil
     @current_user = User.create(name: name)
     @current_user.monologues << @base
     list_commands
   else
-    puts "I've heard of you before! Please sign in as a returning user..."
+    puts "Wait a second...I've heard of you before! Please, do me a favor, and sign in as a returning user..."
     returninguser
   end
 end
@@ -62,114 +67,57 @@ def returninguser
   puts "------------------------------------------------------------------------"
   puts "Welcome back! What dost thou call thee?"
   name = gets.chomp.downcase
-  puts ""
+  puts "------------------------------------------------------------------------"
   @current_user = User.find_by(name: name)
   if @current_user == nil
     puts "That name has never touched thine ears before! Don't worry, though, I'm listening."
     newuser
   else @current_user
-    puts "It's very nice to see you again!"
-    puts "----------------------------------------------------------------------"
+    puts "What a pleasure to see you again, #{name.capitalize}!"
     list_commands
   end
 end
 
 def list_commands
-  puts "What do you want to do?"
-  puts "View monologues"
-  puts "Add a monologue"
-  puts "Please enter 'view' or 'add'."
+  puts "Tell me, #{@current_user.name.capitalize}, what does your heart desire?".bold
+  puts "  View all monologues"
+  puts "  Add a monologue"
+  puts "  Search repertoire by key word"
+  puts "  Switch user"
+  puts "  Quit"
+  puts "Please enter " + "'view'".bold + ", " + "'add'".bold + ", " + "'search'".bold + ", " + "'switch user'".bold + ", or " + "'quit'".bold + "."
   answer = gets.chomp.downcase
+  fork{ exec 'killall afplay'}
   if answer == "view"
     view_monologues
   elsif answer == "add"
     add_monologue
+  elsif answer == "search"
+    search_by_keyword
+  elsif answer == "switch user"
+    welcome
+  elsif answer == 'quit'
+    puts `clear`
+    quit
+    puts ""
   else
-    puts "Youre not very good at following directions."
+    puts "You're not very good at following directions."
+    puts "----------------------------------------------------------------------"
     list_commands
   end
 end
 
 def view_monologues
-  @current_user.monologues.each do |monologue|
-    puts "#{monologue.id}. #{monologue.character} from #{monologue.play}"
+  puts `clear`
+  puts "Here's all of the monologues our scribe has on record for you:".bold
+  @current_user.monologues.each_with_index do |monologue, index|
+    puts "  #{index + 1}. #{monologue.character} from #{monologue.play}"
   end
-  # puts "Select one of the above monologues, or type 'back' to return to the main menu"
-  #   answer = gets.chomp.downcase
-  #   if answer == "back"
-  #     list_commands
-  #   elsif answer
   select_monologue
 end
 
-def select_monologue
-  puts "Please select the number of one of the above monologues, or type 'back' to return to the main menu"
-  answer = gets.chomp
-  answer_num = answer.to_i
-  # binding.pry
-  if answer == 'back'
-    list_commands
-  elsif answer_num.class != Fixnum || answer_num > @current_user.monologues.count || answer_num < 1
-      select_monologue
-  else
-     @current_monologue = @current_user.monologues.find(answer_num)
-     puts "#{@current_monologue.character}, #{@current_monologue.play}"
-     puts "#{@current_monologue.script}"
-     single_monologue_command
-  end
-end
-
-def single_monologue_command
-  puts "What would you like to do with this monologue?"
-  puts "View all attributes"
-  puts "Practice your monologue"
-  puts "Delete this monologue"
-  puts "Go back"
-  puts "Please type 'view', 'practice', 'delete', or 'back'"
-  answer = gets.chomp.downcase
-  if answer == "view"
-    view_all_attributes
-  elsif answer == "practice"
-    practice
-  elsif answer == "delete"
-    @current_monologue.delete.save
-  elsif answer == 'back'
-    view_monologues
-  else
-    single_monologue_command
-  end
-end
-
-def practice
-  puts "Lets try the monologue sentence by sentence, please type the first sentence"
-  monologue_array = @current_monologue.script.split(/[.?!] /)
-  monologue_array.each do |sentence|
-    inputed_sentence = gets.chomp
-    if inputed_sentence == sentence
-      puts "100%"
-      puts "Move on to the next line"
-    elsif inputed_sentence != sentence
-      percentage = comparison(inputed_sentence, sentence).to_f/sentence.size * 100.0
-      puts ""
-      puts "You got #{percentage}% of this line correct! You might want a little more practice!"
-      puts "The line was actually '#{sentence}'"
-      puts "Move on to the next line"
-    end
-  end
-end
-
-def comparison(a,b)
-    a.each_char.zip(b.each_char).select { |a,b| a == b }.size
-end
-
-def view_all_attributes
-  puts "Character: #{@current_monologue.character}, Age: #{@current_monologue.age}"
-  puts "Play: #{@current_monologue.play}, Genre: #{@current_monologue.genre}"
-  puts "Timing #{@current_monologue.timing}"
-  puts "#{@current_monologue.script}"
-end
-
 def add_monologue
+  puts `clear`
   puts "Oh, you're adding to the repertoire, I see."
   puts "What play is this from?"
   play = gets.chomp
@@ -184,5 +132,185 @@ def add_monologue
   puts "Type this monologue exactly as you'd like to learn it."
   script = gets.chomp
   @current_user.monologues << Monologue.create(play: play, character: character, age: age, timing: timing, genre: genre, script: script)
-  puts @current_user.monologues[-1]
+  puts "Successfuly added!"
+  view_monologues
+end
+
+def search_by_keyword
+  puts `clear`
+  puts "Search: "
+  answer = gets.chomp
+  monos = @current_user.monologues.where("play || ' ' || character || ' ' || genre || ' ' || age || ' ' || script || ' ' || timing LIKE ?", "%#{answer}%")
+  # binding.pry
+  monos.each_with_index do |mono, index|
+    puts "  #{index + 1}. #{mono.character} from #{mono.play}"
+  end
+
+  puts "Please select the number of one of the above monologues, or type 'back' to return to the main menu"
+  answer = gets.chomp
+  answer_num = answer.to_i
+  # binding.pry
+  if answer == 'back'
+    list_commands
+  elsif answer_num.class != Fixnum || answer_num < 1 || monos.count < answer_num
+    puts "That was absolutely not a reply that we asked for. We don't know exactly how to deal with you, so we will just send you back to the main menu."
+    list_commands
+  else
+    puts `clear`
+     @current_monologue = monos[answer_num - 1]
+     puts "#{@current_monologue.character} from #{@current_monologue.play}".bold
+     puts ""
+     puts "#{@current_monologue.script}"
+     single_monologue_command
+  end
+end
+
+def quit
+  pid = fork{ exec 'afplay', "/Users/flatironschool/Development/Mod 1 Labs/Week 3 Project/module-one-final-project-guidelines-dumbo-web-100818/music/sawsquarenoise_-_Whosi.mp3" }
+  bear
+  puts ". . . A savage clamour!
+    Well may I get aboard! This is the chase:
+    I am gone for ever.
+    [Exeunt, pursued by a bear.]"
+    # bear = File.read(/Users/flatironschool/Development/Mod 1 Labs/Week 3 Project/module-one-final-project-guidelines-dumbo-web-100818/images/bearascii.html)
+  sleep(10)
+  fork{ exec 'killall afplay'}
+end
+
+
+def select_monologue
+  puts "Please select the number of one of the above monologues, or type 'back' to return to the main menu"
+  answer = gets.chomp
+  answer_num = answer.to_i
+  # binding.pry
+  if answer == 'back'
+    list_commands
+  elsif answer_num.class != Fixnum || answer_num < 1 || @current_user.monologues.count < answer_num
+    select_monologue
+  else
+    puts `clear`
+     @current_monologue = @current_user.monologues[answer_num - 1]
+     puts "#{@current_monologue.character} from #{@current_monologue.play}".bold
+     puts ""
+     puts "#{@current_monologue.script}"
+     single_monologue_command
+  end
+end
+
+def single_monologue_command
+  puts "------------------------------------------------------------------------"
+  puts "What would you like to do with this monologue?".bold
+  puts "  View all attributes"
+  puts "  Practice your monologue"
+  puts "  Listen to this monologue"
+  puts "  Delete this monologue"
+  puts "  Go back"
+  puts "Please type 'view', 'practice', 'listen', 'delete', or 'back'"
+  answer = gets.chomp.downcase
+  if answer == "view"
+    view_all_attributes
+  elsif answer == "practice"
+    practice
+  elsif answer == "listen"
+    listen_to_monologue
+  elsif answer == "delete"
+    @current_user.monologues.delete(@current_monologue)
+    view_monologues
+  elsif answer == 'back'
+    view_monologues
+  else
+    single_monologue_command
+  end
+end
+
+def view_all_attributes
+  puts `clear`
+  puts "------------------------------------------------------------------------"
+  puts "Character: #{@current_monologue.character}, Age: #{@current_monologue.age}"
+  puts "Play: #{@current_monologue.play}, Genre: #{@current_monologue.genre}"
+  puts "Length: #{@current_monologue.timing}"
+  puts "#{@current_monologue.script}"
+  puts "------------------------------------------------------------------------"
+  puts ""
+  back
+end
+
+def practice
+  puts `clear`
+  puts "Let's try the monologue sentence by sentence. Start by typing the first sentence, then press Enter."
+  puts ""
+  monologue_array = @current_monologue.script.split(/[.?!] /)
+  i = 0
+  while i < monologue_array.count - 1
+    sentence_check(monologue_array, i)
+    puts "Move onto the next sentence"
+
+    i+=1
+  end
+  sentence_check(monologue_array, i)
+  puts ""
+  puts "Great practice session!".bold
+  puts ""
+  back
+end
+
+def sentence_check(monologue_array, i)
+  inputed_sentence = gets.chomp
+    if inputed_sentence == monologue_array[i]
+      puts "Perfect!".green
+    elsif inputed_sentence != monologue_array[i]
+      puts "The sentence was actually: " + "#{monologue_array[i]}".red
+      system "say", monologue_array[i]
+    end
+end
+
+def listen_to_monologue
+  script = @current_monologue.script
+  system "say", script
+  back
+end
+
+def back
+  puts `clear`
+  puts "Please type 'back' to go back"
+  answer = gets.chomp.downcase
+  if answer == "back"
+    single_monologue_command
+  else
+    back
+  end
+end
+
+
+
+def bear
+  puts " *****//*//////*******///////**/***********//*//////////********************,***,**,,,***,,,*****,,,**,*********************,,,,,,,,,,,,,,,,,,,,***,,,,,,,,,,,,,"
+  puts " //*//////////////////////////////******/////////////(//********************************************************************,,,,,,,,,*,,,,,,,,,*,,,,,,,,,,,,,,,,"
+  puts " //////////////////////////////////////////////***/////***************************************************/************//************,,,,,,,,,,***,,,,,,,,,,,,,,"
+  puts " ///////////////////////////////////////////////////////*************************************************************////*****///********,,,,,,****,,,,,,,,,,,,,"
+  puts " (/////////////(//(/////////////////////**/////******////////*******************************************************////*******************,,,,,,,,,,,,,,,,,,,,,"
+  puts " /////////////////////////////////////////////////////////*************************************************/////*************///*******************,,,,,,,,,,,,,"
+  puts " (/////////////((////////////////////////////////////////////////////*********************************************************************************,,,,,,,,,,"
+  puts " ((((((((//(((((((((((////(((//////////////////((//////////////////////*******/***************************************************************************,,,,,,"
+  puts " ((((((((((((((((((((((((((((((((((///////////////////////////////////**********************/(((///*.  ,**********,,*****/*****************/////**************,,"
+  puts " (((((((((((((((((((((((((((((((((((((((///////////////////////////////****///***************//*///,     *//***/**..***********************/(((*****************"
+  puts " ((((((((((((#((((((((((((((((((((((((((///((((//////////////////////////////////////////////*//////,.   *///////*.*//*******************************//*********"
+  puts " (((((((((((((((((((((((((((((((((((((((((/(((////////////////////////////////////////////////////*.     ,//////,.,////******//********************///**********"
+  puts " ##((((((#########(((((((###(((((((((((((((((((((////((((((///////////////////////////////////*,.                .//////////*////////**************//((((//*///*"
+  puts " ##########################((((((((((((((((((((((((((((//(((((///////////////////////////////.  .,,.       .***/////////////***********************////((((////*"
+  puts " #########################(((((((((((((((((((((((((((((((((((((((///////////////////////////, */////       ./////////////////******/***************//////////***"
+  puts " ########################((((((((((((((((((((((((((((//,.*((((((((((//(/(((///////((////////.,//////,.      ///////////////////////************///**************"
+  puts " #####################################((**.....           ,(((((((((((((((((((((((((((((((*..///////*.      ,***/////////////////////**/////***/****************"
+  puts " ##%%###############################(,.                   .((((((((((((((((((((((((((((((((/(((((///*.             .*////////////////////////**//*///////////**/"
+  puts " %%%%%%%%%%##%%###################/,                      ./((((((((((((((((((((((((((((((((((((((((*.              ,///////////////////////////////////////////"
+  puts " %%%%%%%#%%%%%%%%%###%%%%%%%#####(                          ,(((((((((((((((((((((((((((((((((((((((,.    .*///*.   ////((//////////////////////////////////////"
+  puts " %%%%%%%%%%%%%%%%%%%%%%%#%#######,                        .(((##((((((((((((((((((((((((((((((((((((.    .((((((*. ,(((/////////////////////////////////////////"
+  puts " %%%%%%%%%%%%%%%%%%%%##%%%%###%##.                  ..     ,/#######((((((((((((####(((((((((((((((/     /((((((*..((((///(/(((/////////////////////////////////"
+  puts " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%#%#.                  ,((,     *##########(((((############(((((//,..    /((((((((, ,((((((((/(((//////(//////////////////////////"
+  puts " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#(           .*/     .(##(/    /(##############(#####((((#(.        .,,/(((((((((.  ,**((((((((//////////((//////////////////////"
+  puts " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%#,    ,.     /###/*     .(###(/,,*#################((##((((#, *#######((((((((((((((((((((((((((((((//((((((((////////////////////"
+  puts " %%%%%%%%%%%%%%%%%%%%%%%######/   /##/.   /######(,     ,*(#########################(((((#*,((((###(((((((((((((((((((((((((((((((((((((((//////////////////////"
+  puts " ##%%###(#####(((((((/(//(((//.  ,/*/,    .**,**,,,,,  .,**,,,,,,,,,,,,,*,,,,,**,,,,,,,**,,,,***,*********,***////*/(//////((((((//(((((////////////////////////"
+  puts "                                                                                                                                                           ....,"
+  puts "                                                                                                                                                              "
 end
