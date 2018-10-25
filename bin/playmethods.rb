@@ -33,7 +33,6 @@ def welcome
 
   puts ""
   puts "______________________________________________________________________________"
-  # fork{ exec 'killall afplay'}
   returning?
 end
 
@@ -152,7 +151,6 @@ def display_monologues(monos)
   end
 end
 
-
 def search_by_keyword
   monos = search
   if monos.count == 0
@@ -163,8 +161,6 @@ def search_by_keyword
   display_monologues(monos)
   select_monologue(monos, monos)
 end
-
-
 
 def quit
   pid = fork{ exec 'afplay', "/Users/flatironschool/Development/Mod 1 Labs/Week 3 Project/module-one-final-project-guidelines-dumbo-web-100818/music/sawsquarenoise_-_Whosi.mp3" }
@@ -202,11 +198,9 @@ def quit
     Well may I get aboard! This is the chase:
     I am gone for ever.
     ".bold + "[Exeunt, pursued by a bear.]".bold.red
-    # bear = File.read(/Users/flatironschool/Development/Mod 1 Labs/Week 3 Project/module-one-final-project-guidelines-dumbo-web-100818/images/bearascii.html)
   sleep(10)
   fork{ exec 'killall afplay'}
 end
-
 
 def select_monologue(method, array_monologues)
   puts "Please select the number of one of the above monologues, or type " + "'back'".bold + " to return to the main menu"
@@ -261,18 +255,18 @@ def single_monologue_command
 end
 
 def share
-  puts "Please type in the name of the user you would like to share this monologue with.".cyan.bold
+  puts "Please type in the name of the user you would like our scribe to share this monologue with.".cyan.bold
   name = gets.chomp.downcase
   friend = User.find_by(name: name)
   binding.pry
   if friend == nil
-    "We're sorry, #{name.capitalize} doesn't have an account with us.".bold
+    "Apologies, we don't have #{name.capitalize}'s records".bold
   else
     if friend.monologues.include?(@current_monologue)
       puts "#{name.capitalize} already has that monologue!".bold
     else
       friend.monologues << @current_monologue
-      puts "Your monologue has been shared with #{name.capitalize}!!".green.bold
+      puts "Our scribe has shared this monologue with #{name.capitalize}!!".green.bold
     end
   end
   single_monologue_command
