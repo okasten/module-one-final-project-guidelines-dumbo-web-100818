@@ -20,6 +20,7 @@ require 'colorize'
 def welcome
   pid = fork{ exec 'afplay', "/Users/flatironschool/Development/Mod 1 Labs/Week 3 Project/module-one-final-project-guidelines-dumbo-web-100818/music/sawsquarenoise_-_Whosi.mp3" }
   puts "______________________________________________________________________________"
+  puts ""
   greeting = "Greetings, Thespian! Here, you can behold your speeches to the people! 'Speak the speech, I pray you, as I pronounced it to you, trippingly on the tongue.".split("")
 
   greeting.each do |char|
@@ -37,7 +38,7 @@ def welcome
 end
 
 def returning?
-  puts "Are you an experienced Thespian or are you new?"
+  puts "Are you an experienced Thespian or are you new?".cyan.bold
   puts "Please enter " + "'returning'".bold + " or " + "'new'".bold + "."
   answer = gets.chomp.downcase
   if answer == "new"
@@ -51,7 +52,7 @@ def returning?
 end
 
 def newuser
-  puts "What shall I call thee?"
+  puts "What shall I call thee?".cyan.bold
   name = gets.chomp.downcase
   if User.find_by(name: name) == nil
     @current_user = User.create(name: name)
@@ -59,14 +60,14 @@ def newuser
     list_commands
   else
     puts `clear`
-    puts "Wait a second...I've heard of you before! Please, do me a favor, and sign in as a returning user..."
+    puts "Wait a second...I've heard of you before! Please, do me a favor, and sign in as a returning user...".bold
     returninguser
   end
 end
 
 def returninguser
   puts "------------------------------------------------------------------------"
-  puts "Welcome back! What dost thou call thee?"
+  puts "Welcome back! What dost thou call thee?".cyan.bold
   name = gets.chomp.downcase
   puts "------------------------------------------------------------------------"
   fork{ exec 'killall afplay'}
@@ -75,14 +76,14 @@ def returninguser
     puts "That name has never touched thine ears before! Don't worry, though, I'm listening."
     newuser
   else @current_user
-    puts "What a pleasure to see you again, #{name.capitalize}!"
+    puts "What a pleasure to see you again, #{name.capitalize}!".cyan.bold
     list_commands
   end
 end
 
 def list_commands
   puts `clear`
-  puts "Tell me, #{@current_user.name.capitalize}, what does your heart desire?".bold
+  puts "Tell me, #{@current_user.name.capitalize}, what does your heart desire?".cyan.bold
   puts "  View all monologues"
   puts "  Add a monologue"
   puts "  Search repertoire by key word"
@@ -112,34 +113,34 @@ end
 
 def view_monologues
   puts `clear`
-  puts "Here's all of the monologues our scribe has on record for you:".bold
+  puts "Here's all of the monologues our scribe has on record for you:".cyan.bold
   display_monologues(@current_user.monologues)
   select_monologue(" ", @current_user.monologues)
 end
 
 def add_monologue
   puts `clear`
-  puts "Oh, you're adding to the repertoire, I see."
-  puts "What play is this from?"
+  puts "Oh, you're adding to the repertoire, I see.".cyan.bold
+  puts "What play is this from?".bold
   play = gets.chomp
-  puts "Which character is this?"
+  puts "Which character is this?".bold
   character = gets.chomp
-  puts "How old is this character?"
+  puts "How old is this character?".bold
   age = gets.chomp
-  puts "What genre is this monologue? i.e comedy, drama?"
+  puts "What genre is this monologue? i.e comedy, drama?".bold
   genre = gets.chomp
-  puts "How long is this monologue?"
+  puts "How long is this monologue?".bold
   timing = gets.chomp
-  puts "Type this monologue exactly as you'd like to learn it."
+  puts "Type this monologue exactly as you'd like to learn it.".bold
   script = gets.chomp
   @current_user.monologues << Monologue.create(play: play, character: character, age: age, timing: timing, genre: genre, script: script)
   puts `clear`
-  puts "Successfuly added!"
+  puts "Successfuly added!".green.bold
   view_monologues
 end
 
 def search
-  puts "Search: ".bold
+  puts "Search: ".cyan.bold
   answer = gets.chomp
   selection = ""
   monos = @current_user.monologues.where("play || ' ' || character || ' ' || genre || ' ' || age || ' ' || script || ' ' || timing LIKE ?", "%#{answer}%")
@@ -156,7 +157,7 @@ def search_by_keyword
   monos = search
   if monos.count == 0
     puts `clear`
-    puts "Nothing in your repertoire matches your search. Try again."
+    puts "Nothing in your repertoire matches your search. Try again.".bold
     search_by_keyword
   end
   display_monologues(monos)
@@ -200,7 +201,7 @@ def quit
   puts ". . . A savage clamour!
     Well may I get aboard! This is the chase:
     I am gone for ever.
-    " + "[Exeunt, pursued by a bear.]".bold
+    ".bold + "[Exeunt, pursued by a bear.]".bold.red
     # bear = File.read(/Users/flatironschool/Development/Mod 1 Labs/Week 3 Project/module-one-final-project-guidelines-dumbo-web-100818/images/bearascii.html)
   sleep(10)
   fork{ exec 'killall afplay'}
@@ -232,13 +233,14 @@ end
 
 def single_monologue_command
   puts "------------------------------------------------------------------------"
-  puts "What would you like to do with this monologue?".bold
+  puts "What would you like to do with this monologue?".cyan.bold
   puts "  View all attributes"
-  puts "  Practice your monologue"
+  puts "  Practice this monologue"
   puts "  Listen to this monologue"
+  puts "  Share this monologue with another user"
   puts "  Delete this monologue"
   puts "  Go back to main menu"
-  puts "Please type " + "'view'".bold + ", " + "'practice'".bold + ", " + "'listen'".bold + ", " + "'delete'".bold + ", or " + "'back'".bold + "."
+  puts "Please type " + "'view'".bold + ", " + "'practice'".bold + ", " + "'listen'".bold + ", " + "'share'".bold + ", " + "'delete'".bold + ", or " + "'back'".bold + "."
   answer = gets.chomp.downcase
   if answer == "view"
     view_all_attributes
@@ -246,6 +248,8 @@ def single_monologue_command
     practice
   elsif answer == "listen"
     listen_to_monologue
+  elsif answer == "share"
+    share
   elsif answer == "delete"
     @current_user.monologues.delete(@current_monologue)
     view_monologues
@@ -254,6 +258,24 @@ def single_monologue_command
   else
     single_monologue_command
   end
+end
+
+def share
+  puts "Please type in the name of the user you would like to share this monologue with.".cyan.bold
+  name = gets.chomp.downcase
+  friend = User.find_by(name: name)
+  binding.pry
+  if friend == nil
+    "We're sorry, #{name.capitalize} doesn't have an account with us.".bold
+  else
+    if friend.monologues.include?(@current_monologue)
+      puts "#{name.capitalize} already has that monologue!".bold
+    else
+      friend.monologues << @current_monologue
+      puts "Your monologue has been shared with #{name.capitalize}!!".green.bold
+    end
+  end
+  single_monologue_command
 end
 
 def view_all_attributes
@@ -270,7 +292,7 @@ end
 
 def practice
   puts `clear`
-  puts "Let's try the monologue sentence by sentence. Start by typing the first sentence, then press Enter."
+  puts "Let's try the monologue sentence by sentence. Start by typing the first sentence, then press Enter.".cyan.bold
   puts ""
   monologue_array = @current_monologue.script.split(/[.?!] /)
   i = 0
@@ -290,7 +312,7 @@ end
 def sentence_check(monologue_array, i)
   inputed_sentence = gets.chomp
     if inputed_sentence == monologue_array[i]
-      puts "Perfect!".green
+      puts "Perfect!".green.bold
     elsif inputed_sentence != monologue_array[i]
       puts "The sentence was actually: ".bold + "#{monologue_array[i]}".red
       system "say", monologue_array[i]
