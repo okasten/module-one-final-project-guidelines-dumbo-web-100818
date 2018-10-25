@@ -208,7 +208,7 @@ def select_monologue(method, array_monologues)
   answer_num = answer.to_i
   # binding.pry
   if answer == 'back'
-    if method.class == String
+    if method.class == String || method.class == Monologue::ActiveRecord_AssociationRelation
       list_commands
     else
       method
@@ -258,7 +258,7 @@ def share
   puts "Please type in the name of the user you would like our scribe to share this monologue with.".cyan.bold
   name = gets.chomp.downcase
   friend = User.find_by(name: name)
-  binding.pry
+
   if friend == nil
     "Apologies, we don't have #{name.capitalize}'s records".bold
   else
