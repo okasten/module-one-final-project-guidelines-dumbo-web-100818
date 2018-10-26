@@ -200,6 +200,7 @@ def quit
     ".bold + "[Exeunt, pursued by a bear.]".bold.red
   sleep(10)
   fork{ exec 'killall afplay'}
+  exit
 end
 
 def select_monologue(method, array_monologues)
@@ -287,12 +288,13 @@ end
 def practice
   puts `clear`
   puts "Let's try the monologue sentence by sentence. Start by typing the first sentence, then press Enter.".cyan.bold
+  puts "If you'd like to exit the practice session at any point, type 'back' and press Enter."
   puts ""
   monologue_array = @current_monologue.script.split(/[.?!] /)
   i = 0
   while i < monologue_array.count - 1
     sentence_check(monologue_array, i)
-    puts "Move onto the next sentence".bold
+    puts "Move on to the next sentence".bold
 
     i+=1
   end
@@ -305,7 +307,9 @@ end
 
 def sentence_check(monologue_array, i)
   inputed_sentence = gets.chomp
-    if inputed_sentence == monologue_array[i]
+    if inputed_sentence == "back"
+      single_monologue_command
+    elsif inputed_sentence == monologue_array[i]
       puts "Perfect!".green.bold
     elsif inputed_sentence != monologue_array[i]
       puts "The sentence was actually: ".bold + "#{monologue_array[i]}".red
@@ -320,9 +324,10 @@ def listen_to_monologue
 end
 
 def back
-  puts `clear`
+  # puts `clear`
   puts "Please type " + "'back'".bold + " to go back"
   answer = gets.chomp.downcase
+  puts `clear`
   if answer == "back"
     single_monologue_command
   else
