@@ -282,7 +282,7 @@ def view_all_attributes
   puts "#{@current_monologue.script}"
   puts "------------------------------------------------------------------------"
   puts ""
-  back
+  back(single_monologue_command)
 end
 
 def practice
@@ -302,16 +302,16 @@ def practice
   puts ""
   puts "Great practice session!".green.bold
   puts ""
-  back
+  back(single_monologue_command)
 end
 
 def sentence_check(monologue_array, i)
-  inputed_sentence = gets.chomp
+  inputed_sentence = gets.chomp.downcase
     if inputed_sentence == "back"
       single_monologue_command
-    elsif inputed_sentence == monologue_array[i]
+    elsif inputed_sentence == monologue_array[i].downcase
       puts "Perfect!".green.bold
-    elsif inputed_sentence != monologue_array[i]
+    elsif inputed_sentence != monologue_array[i].downcase
       puts "The sentence was actually: ".bold + "#{monologue_array[i]}".red
       system "say", monologue_array[i]
     end
@@ -320,17 +320,17 @@ end
 def listen_to_monologue
   script = @current_monologue.script
   system "say", script
-  back
+  back(single_monologue_command)
 end
 
-def back
+def back(method)
   # puts `clear`
   puts "Please type " + "'back'".bold + " to go back"
   answer = gets.chomp.downcase
   puts `clear`
   if answer == "back"
-    single_monologue_command
+    method
   else
-    back
+    back("")
   end
 end
